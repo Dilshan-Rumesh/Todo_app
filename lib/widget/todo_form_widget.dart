@@ -22,17 +22,52 @@ class TodoFormWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             buildTitle(),
+            SizedBox(
+              height: 8,
+            ),
+            buildDescription(),
+            SizedBox(
+              height: 8,
+            ),
+            buildButton(),
           ],
         ),
       );
 
   Widget buildTitle() => TextFormField(
-        // maxLines: 1,
+        maxLines: 1,
         initialValue: title,
-
+        onChanged: onChangedTitle,
+        validator: (title) {
+          if (title.isEmpty) {
+            return 'The title cannot be empty';
+          } else {
+            return null;
+          }
+        },
         decoration: InputDecoration(
           border: UnderlineInputBorder(),
           labelText: 'Title',
+        ),
+      );
+
+  Widget buildDescription() => TextFormField(
+        maxLines: 3,
+        initialValue: title,
+        onChanged: onChangedTitle,
+        decoration: InputDecoration(
+          border: UnderlineInputBorder(),
+          labelText: 'Description',
+        ),
+      );
+  Widget buildButton() => SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.black),
+          ),
+          onPressed: onSavedTodo,
+          child: Text('Save'),
         ),
       );
 }

@@ -15,6 +15,8 @@ class _AddTodoDialogWidgetState extends State<AddTodoDialogWidget> {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Add Todo',
