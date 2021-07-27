@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/widget/add_todo_dialog.dart';
-
+import 'package:todo_app/main.dart';
+import 'package:todo_app/widget/add_todo_dialog_widget.dart';
+import 'package:todo_app/widget/todo_list_widget.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -8,42 +9,49 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Container(),
+      TodoListWidget(),
       Container(),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo App'),
+        title: Text(MyApp.title),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pink,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.white,
+        backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.white.withOpacity(0.7),
+        selectedItemColor: Colors.white,
         currentIndex: selectedIndex,
         onTap: (index) => setState(() {
           selectedIndex = index;
         }),
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.fact_check_outlined), label: 'Todos'),
-          BottomNavigationBarItem(icon: Icon(Icons.done), label: 'Completed'),
+            icon: Icon(Icons.fact_check_outlined),
+            label: 'Todos',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.done, size: 28),
+            label: 'Completed',
+          ),
         ],
       ),
       body: tabs[selectedIndex],
       floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         backgroundColor: Colors.black,
-        child: Icon(Icons.add),
-        //
         onPressed: () => showDialog(
           context: context,
-          child: AddTodoDialogWidget(),
+          builder: (context) => AddTodoDialogWidget(),
           barrierDismissible: false,
         ),
+        child: Icon(Icons.add),
       ),
     );
   }

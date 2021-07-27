@@ -22,13 +22,9 @@ class TodoFormWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             buildTitle(),
-            SizedBox(
-              height: 8,
-            ),
+            SizedBox(height: 8),
             buildDescription(),
-            SizedBox(
-              height: 8,
-            ),
+            SizedBox(height: 32),
             buildButton(),
           ],
         ),
@@ -41,9 +37,8 @@ class TodoFormWidget extends StatelessWidget {
         validator: (title) {
           if (title.isEmpty) {
             return 'The title cannot be empty';
-          } else {
-            return null;
           }
+          return null;
         },
         decoration: InputDecoration(
           border: UnderlineInputBorder(),
@@ -53,13 +48,14 @@ class TodoFormWidget extends StatelessWidget {
 
   Widget buildDescription() => TextFormField(
         maxLines: 3,
-        initialValue: title,
-        onChanged: onChangedTitle,
+        initialValue: description,
+        onChanged: onChangedDescription,
         decoration: InputDecoration(
           border: UnderlineInputBorder(),
           labelText: 'Description',
         ),
       );
+
   Widget buildButton() => SizedBox(
         width: double.infinity,
         child: ElevatedButton(
